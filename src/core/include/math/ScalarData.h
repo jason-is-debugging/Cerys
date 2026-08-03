@@ -1,4 +1,4 @@
-//  Copyright (c) 2025-2026 Contributors of Cerys(https://github.com/jason-is-debugging/Cerys)
+//  Copyright (c) 2026-2026 Contributors of Cerys(https://github.com/jason-is-debugging/Cerys)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,16 +16,7 @@
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
 
-#ifndef INC_6F44DD97E32942BEBBA5B40966866484
-#define INC_6F44DD97E32942BEBBA5B40966866484
+#ifndef CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H
+#define CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H
 
-namespace cerys::core
-{
-    class ScalarData
-    {
-    public:
-
-    };
-}
-
-#endif //INC_6F44DD97E32942BEBBA5B40966866484
+#endif //CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H
