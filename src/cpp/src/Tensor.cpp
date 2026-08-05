@@ -16,10 +16,4 @@
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
 
-
-#ifndef CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H
-#define CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H
-
-#include "compute/DispatcherKey.h"
-
-#endif //CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H
+#include "Tensor.h"

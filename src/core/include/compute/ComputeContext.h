@@ -1,3 +1,4 @@
+
 //  Copyright (c) 2026-2026 Contributors of Cerys(https://github.com/jason-is-debugging/Cerys)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +16,14 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+#ifndef CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
+#define CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
 
-#ifndef CERYS_DATATYPEREGISTER_7A3905547A154708BF3C499251365D4A_H
-#define CERYS_DATATYPEREGISTER_7A3905547A154708BF3C499251365D4A_H
+namespace cerys::core::compute {
+class ComputeContext {
+public:
 
-namespace cerys::core::base {
-    class DeviceRegistry {
-               
-    };
+};
 }
-#endif //CERYS_DATATYPEREGISTER_7A3905547A154708BF3C499251365D4A_H
+
+#endif //CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H

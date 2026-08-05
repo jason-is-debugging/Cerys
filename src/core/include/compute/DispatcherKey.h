@@ -19,4 +19,49 @@
 #ifndef CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
 #define CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
 
+#include "defines.h"
+
+namespace cerys::core::compute {
+class DispatcherKey {
+public:
+    DispatcherKey(
+        const OperatorID operatorID,
+        const DeviceID deviceID,
+        const DataTypeID dataTypeID
+        ) : mOperatorID(operatorID),
+            mDeviceID(deviceID),
+            mDataTypeID(dataTypeID) {
+    }
+
+    OperatorID getOperatorID() const {
+        return mOperatorID;
+    }
+
+    DeviceID getDeviceID() const {
+        return mDeviceID;
+    }
+
+    DataTypeID getDataTypeID() const {
+        return mDataTypeID;
+    }
+
+    void setOperatorID(const OperatorID operatorID) {
+        mOperatorID = operatorID;
+    }
+
+    void setDeviceID(const DeviceID deviceID) {
+        mDeviceID = deviceID;
+    }
+
+    void setDataTypeID(const DataTypeID dataTypeID) {
+        mDataTypeID = dataTypeID;
+    }
+
+private:
+    OperatorID mOperatorID;
+    DeviceID mDeviceID;
+    DataTypeID mDataTypeID;
+};
+}
+
 #endif //CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H

@@ -22,8 +22,7 @@
 #include <cstdint>
 #include <string_view>
 
-namespace cerys::core
-{
+namespace cerys::core {
 using Int32 = std::int32_t;
 using UInt32 = std::uint32_t;
 using Int64 = std::int64_t;
@@ -35,8 +34,9 @@ using UInt8 = std::uint8_t;
 using Int16 = std::int16_t;
 using UInt16 = std::uint16_t;
 
-using DataType = Int32;
-using Operator = Int32;
+using DataTypeID = Int32;
+using OperatorID = Int32;
+using DeviceID = Int32;
 
 }
 
