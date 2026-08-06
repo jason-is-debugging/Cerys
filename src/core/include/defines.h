@@ -40,7 +40,7 @@ using DeviceID = Int32;
 
 using SizeT = Int64;
 
-using Pointer = void*;
+using Pointer = char*;
 
 }
 

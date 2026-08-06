@@ -15,19 +15,24 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+
+#ifndef CERYS_ALLOCATOR_66C219DD3E064731BBFD7F1C55B5C76E_H
+#define CERYS_ALLOCATOR_66C219DD3E064731BBFD7F1C55B5C76E_H
 #include "defines.h"
 
-namespace cerys::core::base {
-class Storage {
-public:
+namespace cerys::core::arch::cpu {
+    class Allocator {
+    public:
+        static Pointer allocate(const SizeT size) {
+            return new char[size];
+        }
 
-private:
-    DeviceID mDeviceID;
-    void* mPointer;
-    SizeT mSize;
-};
+        static void deallocate(const Pointer pointer) {
+            delete[] pointer;
+        }
+    };
+
+
 }
 
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+#endif //CERYS_ALLOCATOR_66C219DD3E064731BBFD7F1C55B5C76E_H

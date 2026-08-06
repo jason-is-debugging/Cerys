@@ -24,6 +24,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "defines.h"
+
 namespace cerys::core::base {
 template <typename ID>
 class Registry {

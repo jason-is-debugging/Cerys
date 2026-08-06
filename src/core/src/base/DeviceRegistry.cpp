@@ -15,19 +15,18 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#include "defines.h"
+
+#include "base/DeviceRegistry.h"
 
 namespace cerys::core::base {
-class Storage {
-public:
+    std::unordered_map<DeviceID, Device> deviceIDMap;
+    std::unordered_map<std::string , Device> deviceNameMap;
 
-private:
-    DeviceID mDeviceID;
-    void* mPointer;
-    SizeT mSize;
-};
+    Device getDeviceByID(const DeviceID deviceID) {
+        return deviceIDMap.at(deviceID);
+    }
+
+    Device getDeviceByName(const std::string &deviceName) {
+        return deviceNameMap.at(deviceName);
+    }
 }
-
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H

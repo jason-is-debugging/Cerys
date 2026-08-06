@@ -67,7 +67,6 @@ private:
     };
 
     std::unordered_map<DeviceID, Allocator> mAllocator;
-
 };
 }
 
