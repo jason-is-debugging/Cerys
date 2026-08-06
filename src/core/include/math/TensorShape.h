@@ -15,24 +15,19 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+#ifndef CERYS_TENSORSHAPE_684793DF42684A3ABB6FEFC355689FDD_H
+#define CERYS_TENSORSHAPE_684793DF42684A3ABB6FEFC355689FDD_H
+#include <vector>
 
-#ifndef CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#define CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#include "TensorMetadata.h"
-#include "TensorShape.h"
-#include "TensorStride.h"
-#include "base/Storage.h"
+#include "defines.h"
 
 namespace cerys::core::math {
-class TensorData {
-private:
-
+class TensorShape {
 public:
-    TensorShape mShape;
-    TensorStride mStride;
-    base::Storage mStorage;
-    TensorMetadata mMetadata;
+
+private:
+    std::vector<SizeT> mShapes;
 };
 }
 
-#endif //CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
+#endif //CERYS_TENSORSHAPE_684793DF42684A3ABB6FEFC355689FDD_H

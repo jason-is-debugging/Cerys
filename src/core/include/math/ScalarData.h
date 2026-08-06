@@ -18,5 +18,16 @@
 
 #ifndef CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H
 #define CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H
+#include "base/Storage.h"
+
+namespace cerys::core::math {
+class ScalarData {
+
+public:
+
+private:
+    base::Storage mStorage;
+};
+}
 
 #endif //CERYS_SCALAR_76B2E3A87F1E4F9A9494195ED591F6D0_H

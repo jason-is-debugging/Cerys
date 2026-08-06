@@ -15,24 +15,18 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+#include "defines.h"
 
-#ifndef CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#define CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#include "TensorMetadata.h"
-#include "TensorShape.h"
-#include "TensorStride.h"
-#include "base/Storage.h"
-
-namespace cerys::core::math {
-class TensorData {
-private:
-
+namespace cerys::core::base {
+class Storage {
 public:
-    TensorShape mShape;
-    TensorStride mStride;
-    base::Storage mStorage;
-    TensorMetadata mMetadata;
+private:
+    DeviceID mDeviceID;
+    void* mPointer;
+    SizeT mSize;
 };
 }
 
-#endif //CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
+#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H

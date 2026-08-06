@@ -15,24 +15,34 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+#ifndef CERYS_DEIVCE_9D8FD954CFDD4FA6AE3C68BC23C29DD7_H
+#define CERYS_DEIVCE_9D8FD954CFDD4FA6AE3C68BC23C29DD7_H
+#include <string>
 
-#ifndef CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#define CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
-#include "TensorMetadata.h"
-#include "TensorShape.h"
-#include "TensorStride.h"
-#include "base/Storage.h"
+#include "defines.h"
+#include "MemoryManager.h"
 
-namespace cerys::core::math {
-class TensorData {
-private:
-
+namespace cerys::core::base {
+class Device {
 public:
-    TensorShape mShape;
-    TensorStride mStride;
-    base::Storage mStorage;
-    TensorMetadata mMetadata;
+    Device(
+        DeviceID deviceID,
+        AllocateFun allocateFun,
+        DeallocateFun deallocFun);
+
+    Pointer allocate(const SizeT size);
+
+    void deallocate(Pointer ptr);
+
+    std::string getName();
+
+    DeviceID getDeviceID();
+
+private:
+    DeviceID mDeviceID;
+    AllocateFun mAllocateFun;
+    DeallocateFun mDeallocateFun;
 };
 }
 
-#endif //CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
+#endif //CERYS_DEIVCE_9D8FD954CFDD4FA6AE3C68BC23C29DD7_H

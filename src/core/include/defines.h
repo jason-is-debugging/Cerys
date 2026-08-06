@@ -38,6 +38,10 @@ using DataTypeID = Int32;
 using OperatorID = Int32;
 using DeviceID = Int32;
 
+using SizeT = Int64;
+
+using Pointer = void*;
+
 }
 
 #endif //INC_868742493465492C921FD4EACABFA677

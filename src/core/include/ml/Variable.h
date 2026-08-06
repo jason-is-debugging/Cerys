@@ -18,5 +18,16 @@
 
 #ifndef CERYS_VARIABLE_A917829F33A341C48FB81ABCAC711990_H
 #define CERYS_VARIABLE_A917829F33A341C48FB81ABCAC711990_H
+#include "compute/OperatorHandler.h"
+#include "math/TensorData.h"
+
+namespace cerys::core::ml {
+class Variable {
+public:
+
+private:
+    math::TensorData mTensorData;
+};
+}
 
 #endif //CERYS_VARIABLE_A917829F33A341C48FB81ABCAC711990_H

@@ -26,7 +26,6 @@
 
 namespace cerys::core::compute {
 
-class TensorData;
 
 // One operator implementation is a callable that, given a compute context
 // and a flat list of input/output tensors, performs the work on the device
