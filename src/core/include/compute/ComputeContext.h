@@ -1,4 +1,3 @@
-
 //  Copyright (c) 2026-2026 Contributors of Cerys(https://github.com/jason-is-debugging/Cerys)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,24 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+
 #ifndef CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
 #define CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
 
 namespace cerys::core::compute {
+
 class ComputeContext {
 public:
-
+    ComputeContext();
+    OperatorID operatorId() {
+        return mOperatorID;
+    }
+    DeviceID deviceId() {
+        return mDeviceID;
+    }
+private:
+    OperatorID mOperatorID;
+    DeviceID mDeviceID;
 };
 }
 

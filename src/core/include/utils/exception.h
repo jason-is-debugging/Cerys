@@ -15,26 +15,25 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+#ifndef CERYS_EXCEPTION_D150FB88B26F4F91A69FA8EF0C55BE43_H
+#define CERYS_EXCEPTION_D150FB88B26F4F91A69FA8EF0C55BE43_H
+#include <format>
 
-#include <memory>
-
-#include "defines.h"
-
-namespace cerys::core::base {
-class Storage {
-public:
-    Storage();
-    Storage(DeviceID deviceID, Pointer pointer, SizeT size);
-    ~Storage();
-private:
-    DeviceID mDeviceID;
-    Pointer mPointer;
-    SizeT mSize;
-};
-
-using StoragePtr = std::shared_ptr<Storage>;
+namespace std {
+class runtime_error;
 }
 
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+namespace cerys::core::utils {
+template <typename ExceptionType = std::runtime_error, typename... Args>
+[[noreturn]] void throwWithFmt(std::format_string<Args...> fmt, Args&&... args) {
+    throw ExceptionType(std::format(fmt, std::forward<Args>(args)...));
+}
+
+template <typename... Args>
+[[noreturn]] void throwRuntime(std::format_string<Args...> fmt, Args&&... args) {
+    throw std::runtime_error(std::format(fmt, std::forward<Args>(args)...));
+}
+
+}
+
+#endif //CERYS_EXCEPTION_D150FB88B26F4F91A69FA8EF0C55BE43_H

@@ -18,6 +18,7 @@
 
 #ifndef CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
 #define CERYS_TENSORDATA_5117AA3BF8A04C25864C1CE97F4866A5_H
+#include "ScalarData.h"
 #include "TensorMetadata.h"
 #include "TensorShape.h"
 #include "TensorStride.h"
@@ -25,13 +26,43 @@
 
 namespace cerys::core::math {
 class TensorData {
-private:
-
 public:
+    TensorData();
+    ~TensorData();
+
+    ScalarData at(std::vector<SizeT> indices);
+    const ScalarData at(std::vector<SizeT> index) const;
+    TensorData operator[](SizeT index);
+    const TensorData operator[](SizeT index) const;
+
+    void reshape(TensorShape newShape);
+    void permute(TensorShape newShape);
+    void fill(ScalarData data);
+
+    TensorData sum();
+    TensorData mean();
+    TensorData min();
+    TensorData max();
+
+    TensorShape shape();
+    TensorStride stride();
+    TensorMetadata metadata();
+    SizeT offset();
+    base::StoragePtr storage();
+
+    SizeT numel();
+    SizeT ndims();
+    bool isContigugus();
+
+    // a common method to run all operators, replace methods like `add` `sub`
+    static TensorData runOp(std::vector<TensorData> tensorDatas, OperatorID operatorID);
+
+private:
     TensorShape mShape;
     TensorStride mStride;
-    base::Storage mStorage;
+    base::StoragePtr mStorage;
     TensorMetadata mMetadata;
+    SizeT mOffset;
 };
 }
 

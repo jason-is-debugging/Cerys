@@ -24,6 +24,8 @@
 namespace cerys::core::math {
 class TensorShape {
 public:
+    // create a TensorShape with no dim in it
+    TensorShape();
 
 private:
     std::vector<SizeT> mShapes;

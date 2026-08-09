@@ -18,16 +18,19 @@
 #ifndef CERYS_TENSORMETADATA_FEDB4977C33B45AAB6597F314DA542C7_H
 #define CERYS_TENSORMETADATA_FEDB4977C33B45AAB6597F314DA542C7_H
 #include "defines.h"
+#include "TensorData.h"
+#include "base/DeviceRegistry.h"
 
 namespace cerys::core::math {
-class TensorMetadata {
-public:
+    class TensorMetadata {
+    public:
+        TensorMetadata() : mDeviceID(base::NullDeviceID), mRequireGrad(false), mIsContiguous(true) {
+        }
 
-
-private:
-    DeviceID mDeviceID;
-    bool mRequireGrad;
-};
+        DeviceID mDeviceID;
+        bool mRequireGrad;
+        bool mIsContiguous;
+    };
 }
 
 

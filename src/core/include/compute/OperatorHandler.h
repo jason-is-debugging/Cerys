@@ -24,8 +24,11 @@
 #include "defines.h"
 #include "compute/ComputeContext.h"
 
-namespace cerys::core::compute {
+namespace cerys::core::math {
+class TensorData;
+}
 
+namespace cerys::core::compute {
 
 // One operator implementation is a callable that, given a compute context
 // and a flat list of input/output tensors, performs the work on the device
@@ -38,7 +41,7 @@ namespace cerys::core::compute {
 // element of `tensors`), or nullptr if the handler has no outputs.
 using OperatorHandler = std::function<void*(
     ComputeContext& /*ctx*/,
-    std::vector<TensorData>& /*tensors*/
+    std::vector<math::TensorData>& /*tensors*/
     )>;
 
 } // namespace cerys::core::math

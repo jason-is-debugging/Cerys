@@ -22,7 +22,6 @@
 
 namespace cerys::core::math {
 class ScalarData {
-
 public:
 
 private:

@@ -18,15 +18,22 @@
 
 #ifndef CERYS_VARIABLE_A917829F33A341C48FB81ABCAC711990_H
 #define CERYS_VARIABLE_A917829F33A341C48FB81ABCAC711990_H
+#include <memory>
+
 #include "compute/OperatorHandler.h"
 #include "math/TensorData.h"
 
 namespace cerys::core::ml {
 class Variable {
 public:
+    explicit Variable(const math::TensorData& tensorData);
+
+    static void runOp(std::vector<Variable> vars, OperatorID operatorID);
 
 private:
     math::TensorData mTensorData;
+    std::vector<Variable> mParentVariables;
+    OperatorID mOperatorID;
 };
 }
 

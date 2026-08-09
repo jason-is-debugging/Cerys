@@ -15,26 +15,29 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
 
-#include <memory>
 
-#include "defines.h"
+#include "math/TensorData.h"
 
-namespace cerys::core::base {
-class Storage {
-public:
-    Storage();
-    Storage(DeviceID deviceID, Pointer pointer, SizeT size);
-    ~Storage();
-private:
-    DeviceID mDeviceID;
-    Pointer mPointer;
-    SizeT mSize;
-};
+#include "compute/Dispatcher.h"
 
-using StoragePtr = std::shared_ptr<Storage>;
+namespace cerys::core::math {
+TensorData::TensorData() : mShape(TensorShape()),
+                           mStride(TensorStride()),
+                           mStorage(nullptr),
+                           mMetadata(TensorMetadata()),
+                           mOffset(0) {
 }
 
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+TensorData::~TensorData() = default;
+
+TensorData TensorData::runOp(
+    std::vector<TensorData> tensorDatas,
+    OperatorID operatorID) {
+    TensorData result;
+
+    compute::Dispatcher::instance();
+
+    return result;
+}
+}

@@ -15,26 +15,9 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
 
-#include <memory>
+#include "math/TensorStride.h"
 
-#include "defines.h"
+namespace cerys::core::math {
 
-namespace cerys::core::base {
-class Storage {
-public:
-    Storage();
-    Storage(DeviceID deviceID, Pointer pointer, SizeT size);
-    ~Storage();
-private:
-    DeviceID mDeviceID;
-    Pointer mPointer;
-    SizeT mSize;
-};
-
-using StoragePtr = std::shared_ptr<Storage>;
 }
-
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H

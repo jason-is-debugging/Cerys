@@ -40,6 +40,7 @@ using DeviceID = Int32;
 
 using SizeT = Int64;
 
+// this pointer should have same attributes with char *
 using Pointer = char*;
 
 }

@@ -19,6 +19,9 @@
 #ifndef CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
 #define CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
 
+#include <cstddef>
+#include <functional>
+
 #include "defines.h"
 
 namespace cerys::core::compute {
@@ -61,6 +64,24 @@ private:
     OperatorID mOperatorID;
     DeviceID mDeviceID;
     DataTypeID mDataTypeID;
+};
+
+inline bool operator==(const DispatcherKey& lhs, const DispatcherKey& rhs) noexcept {
+    return lhs.getOperatorID() == rhs.getOperatorID()
+        && lhs.getDeviceID()   == rhs.getDeviceID()
+        && lhs.getDataTypeID() == rhs.getDataTypeID();
+}
+}
+
+namespace std {
+template<>
+struct hash<cerys::core::compute::DispatcherKey> {
+    std::size_t operator()(const cerys::core::compute::DispatcherKey& key) const noexcept {
+        std::size_t h = static_cast<std::size_t>(key.getOperatorID());
+        h = h * 0x9E3779B97F4A7C15ULL ^ static_cast<std::size_t>(key.getDeviceID());
+        h = h * 0x9E3779B97F4A7C15ULL ^ static_cast<std::size_t>(key.getDataTypeID());
+        return h;
+    }
 };
 }
 

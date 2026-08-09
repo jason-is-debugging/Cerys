@@ -15,26 +15,15 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
-#ifndef CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-#define CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
-
-#include <memory>
-
-#include "defines.h"
+#ifndef CERYS_ALLOCATOR_B050F18079004348991790F3D828F582_H
+#define CERYS_ALLOCATOR_B050F18079004348991790F3D828F582_H
 
 namespace cerys::core::base {
-class Storage {
+class Allocator {
 public:
-    Storage();
-    Storage(DeviceID deviceID, Pointer pointer, SizeT size);
-    ~Storage();
 private:
-    DeviceID mDeviceID;
-    Pointer mPointer;
-    SizeT mSize;
-};
 
-using StoragePtr = std::shared_ptr<Storage>;
+};
 }
 
-#endif //CERYS_STORAGE_2098C90DCB0645758C30B61ED216D51E_H
+#endif //CERYS_ALLOCATOR_B050F18079004348991790F3D828F582_H

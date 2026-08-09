@@ -20,6 +20,25 @@
 #ifndef CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H
 #define CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H
 
+#include <unordered_map>
+
+#include "OperatorHandler.h"
 #include "compute/DispatcherKey.h"
+
+namespace cerys::core::compute {
+class Dispatcher {
+public:
+
+    static Dispatcher& instance() {
+        static Dispatcher instance;
+        return instance;
+    }
+
+private:
+    Dispatcher() {
+    }
+    std::unordered_map<DispatcherKey, OperatorHandler> mDispatchMap;
+};
+}
 
 #endif //CERYS_DISPATCHER_2D85A508BB3D40FD9119116BB6353CE1_H

@@ -20,6 +20,7 @@
 #include <functional>
 
 #include "defines.h"
+#include "utils/exception.h"
 
 namespace cerys::core::base {
 
@@ -41,6 +42,7 @@ public:
             mAllocator[deviceID].mAllocFun = allocFun;
         }
     }
+
     void registerDeallocator(
         const DeviceID deviceID,
         const DeallocateFun& deallocFun
@@ -50,7 +52,7 @@ public:
         }
     }
 
-    void registerAllocator(
+    void registerFullAllocator(
         const DeviceID deviceID,
         const AllocateFun& allocFun,
         const DeallocateFun& deallocFun
@@ -58,6 +60,25 @@ public:
         if (!mAllocator.contains(deviceID)) {
             mAllocator[deviceID] = {allocFun, deallocFun};
         }
+    }
+
+    AllocateFun allocFun(const DeviceID deviceID) {
+        if (!mAllocator.contains(deviceID)) {
+            utils::throwRuntime(
+                "no allocate function is registered for this DeviceID: {}",
+                deviceID);
+        }
+        return mAllocator[deviceID].mAllocFun;
+    }
+
+    DeallocateFun deallocFun(const DeviceID deviceID) {
+        if (!mAllocator.contains(deviceID)) {
+            utils::throwRuntime(
+                "no deallocate function is registered for this DeviceID: {}",
+                deviceID
+                );
+        }
+        return mAllocator[deviceID].mDeallocFun;
     }
 
 private:
