@@ -18,21 +18,24 @@
 #ifndef CERYS_EXCEPTION_D150FB88B26F4F91A69FA8EF0C55BE43_H
 #define CERYS_EXCEPTION_D150FB88B26F4F91A69FA8EF0C55BE43_H
 #include <format>
-
-namespace std {
-class runtime_error;
-}
+#include <stdexcept>
+#include <string>
+#include <utility>
 
 namespace cerys::core::utils {
+
 template <typename ExceptionType = std::runtime_error, typename... Args>
 [[noreturn]] void throwWithFmt(std::format_string<Args...> fmt, Args&&... args) {
     throw ExceptionType(std::format(fmt, std::forward<Args>(args)...));
 }
-
 template <typename... Args>
-[[noreturn]] void throwRuntime(std::format_string<Args...> fmt, Args&&... args) {
+[[noreturn]] void throwRuntime(std::type_identity_t<std::format_string<Args...>> fmt, Args&&... args) {
     throw std::runtime_error(std::format(fmt, std::forward<Args>(args)...));
 }
+// template <typename... Args>
+// [[noreturn]] void throwRuntime(std::format_string<Args...> fmt, Args&&... args) {
+//     throw std::runtime_error(std::format(fmt, std::forward<Args>(args)...));
+// }
 
 }
 

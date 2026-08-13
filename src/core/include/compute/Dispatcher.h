@@ -34,9 +34,10 @@ public:
         return instance;
     }
 
+    void dispatch(ComputeContext ctx, DispatcherKey key, const std::vector<math::TensorData> &vector);
+
 private:
-    Dispatcher() {
-    }
+    Dispatcher();
     std::unordered_map<DispatcherKey, OperatorHandler> mDispatchMap;
 };
 }

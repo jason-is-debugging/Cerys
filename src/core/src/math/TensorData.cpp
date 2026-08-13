@@ -19,6 +19,10 @@
 
 #include "math/TensorData.h"
 
+#include <format>
+#include <stdexcept>
+
+#include "base/OperatorRegistry.h"
 #include "compute/Dispatcher.h"
 
 namespace cerys::core::math {
@@ -31,13 +35,100 @@ TensorData::TensorData() : mShape(TensorShape()),
 
 TensorData::~TensorData() = default;
 
-TensorData TensorData::runOp(
-    std::vector<TensorData> tensorDatas,
-    OperatorID operatorID) {
-    TensorData result;
-
-    compute::Dispatcher::instance();
-
-    return result;
+ScalarData TensorData::at(std::vector<SizeT> indices) {
 }
+
+ScalarData TensorData::at(std::vector<SizeT> index) const {
+}
+
+TensorData TensorData::operator[](SizeT index) {
+}
+
+TensorData TensorData::operator[](SizeT index) const {
+}
+
+void TensorData::reshape(TensorShape newShape) {
+}
+
+void TensorData::permute(TensorShape newShape) {
+}
+
+void TensorData::fill(ScalarData data) {
+}
+
+TensorShape TensorData::shape() const {
+    return mShape;
+}
+
+TensorStride TensorData::stride() const {
+    return mStride;
+}
+
+
+TensorMetadata TensorData::metadata() const {
+    return mMetadata;
+}
+
+SizeT TensorData::offset() const {
+    return mOffset;
+}
+
+base::StoragePtr TensorData::storage() {
+    return mStorage;
+}
+
+TensorShape& TensorData::shapeRef() {
+    return mShape;
+}
+
+TensorStride& TensorData::strideRef() {
+    return mStride;
+}
+
+TensorMetadata& TensorData::metadataRef() {
+    return mMetadata;
+}
+
+SizeT& TensorData::offsetRef() {
+    return mOffset;
+}
+
+SizeT TensorData::numel() const {
+    return mShape.getTotalElem();
+}
+
+SizeT TensorData::ndims() const {
+    return mShape.ndims();
+}
+
+bool TensorData::isContiguous() const {
+    return mMetadata.mIsContiguous;
+}
+
+DeviceID TensorData::deviceID() const {
+    return mMetadata.mDeviceID;
+}
+
+
+DataTypeID reduceDataType();
+
+void TensorData::runOp(
+    std::vector<TensorData> tensorDatas,
+    const OperatorID operatorID) {
+
+    if (tensorDatas.empty()) {
+        throw std::runtime_error(std::format(
+            "The operands are empty while run Operator {}",
+            base::getOperatorName(operatorID)
+            ));
+    }
+    DeviceID deviceID = tensorDatas.front().deviceID();
+    DataTypeID dataTypeId = reduceDataType();
+    const compute::ComputeContext ctx(tensorDatas.front().deviceID(), operatorID);
+    compute::Dispatcher::instance().dispatch(ctx,
+                                             {operatorID, deviceID, dataTypeId},
+                                             tensorDatas);
+}
+
+
 }

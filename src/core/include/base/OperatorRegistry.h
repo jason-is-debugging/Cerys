@@ -72,6 +72,10 @@ inline const OperatorID ConcatenateOperatorID = OperatorRegistry::instance().
     registerName(ConcatenateOperatorName);
 
 constexpr OperatorID NullOperatorID = std::numeric_limits<OperatorID>::max();
+
+inline std::string getOperatorName(const OperatorID id) noexcept {
+    return OperatorRegistry::instance().getName(id);
+}
 }
 
 #endif // CERYS_OPERATORREGISTER_4984779273484CE0B8546FD40929C648_H

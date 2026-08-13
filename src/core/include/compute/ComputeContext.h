@@ -19,17 +19,27 @@
 #ifndef CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
 #define CERYS_COMPUTECONTEXT_96EAD527A8414A7F9A8FBBA406799E27_H
 
+
+#include "defines.h"
+
 namespace cerys::core::compute {
 
 class ComputeContext {
 public:
-    ComputeContext();
-    OperatorID operatorId() {
+    ComputeContext(
+        const OperatorID operatorID,
+        const DeviceID deviceID) : mOperatorID(operatorID),
+                                   mDeviceID(deviceID) {
+    }
+
+    [[nodiscard]] OperatorID operatorId() const {
         return mOperatorID;
     }
-    DeviceID deviceId() {
+
+    [[nodiscard]] DeviceID deviceId() const {
         return mDeviceID;
     }
+
 private:
     OperatorID mOperatorID;
     DeviceID mDeviceID;

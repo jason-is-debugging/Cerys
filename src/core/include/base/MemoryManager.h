@@ -64,19 +64,19 @@ public:
 
     AllocateFun allocFun(const DeviceID deviceID) {
         if (!mAllocator.contains(deviceID)) {
-            utils::throwRuntime(
+            throw std::runtime_error(std::format(
                 "no allocate function is registered for this DeviceID: {}",
-                deviceID);
+                deviceID));
         }
         return mAllocator[deviceID].mAllocFun;
     }
 
     DeallocateFun deallocFun(const DeviceID deviceID) {
         if (!mAllocator.contains(deviceID)) {
-            utils::throwRuntime(
+            throw std::runtime_error(std::format(
                 "no deallocate function is registered for this DeviceID: {}",
                 deviceID
-                );
+                ));
         }
         return mAllocator[deviceID].mDeallocFun;
     }

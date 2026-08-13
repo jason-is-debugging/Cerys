@@ -41,6 +41,10 @@ inline const DataTypeID Float64ID = DatatypeRegistry::instance().
     registerName(Float64Name);
 
 constexpr DataTypeID NullDataTypeID = std::numeric_limits<DataTypeID>::max();
+
+inline std::string getDatatypeName(const DataTypeID id) noexcept {
+    return DatatypeRegistry::instance().getName(id);
+}
 }
 
 #endif // CERYS_DATATYPEREGISTER_7A3905547A154708BF3C499251365D4A_H

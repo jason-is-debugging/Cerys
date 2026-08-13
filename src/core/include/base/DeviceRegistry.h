@@ -26,6 +26,10 @@ constexpr DeviceID NullDeviceID = std::numeric_limits<DeviceID>::max();
 Device getDeviceByID(DeviceID deviceID);
 
 Device getDeviceByName(const std::string& deviceName);
+
+inline std::string getDeviceName(const DeviceID& id) noexcept {
+    return DeviceRegistry::instance().getName(id);
+}
 }
 
 #endif // CERYS_DEVICEREGISTRY_B044B03ED68645DEAC0F744968BF72D2_H

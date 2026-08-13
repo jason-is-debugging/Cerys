@@ -17,3 +17,15 @@
 //
 
 #include "compute/Dispatcher.h"
+#include "math/TensorData.h"
+
+namespace cerys::core::compute {
+void Dispatcher::dispatch(ComputeContext ctx, DispatcherKey key,
+    const std::vector<math::TensorData>& vector) {
+
+}
+
+Dispatcher::Dispatcher() {
+}
+}
+

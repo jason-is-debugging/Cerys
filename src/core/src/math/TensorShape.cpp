@@ -20,4 +20,21 @@
 
 namespace cerys::core::math {
 
+TensorShape::TensorShape() : mShapes({0}) {
+}
+
+SizeT TensorShape::getTotalElem() const {
+    if (mShapes.empty()) {
+        return 1;
+    }
+    SizeT totalElem = 1;
+    for (const auto dim : mShapes) {
+        totalElem *= dim;
+    }
+    return totalElem;
+}
+
+SizeT TensorShape::ndims() const {
+    return mShapes.size();
+}
 }

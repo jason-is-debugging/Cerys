@@ -24,11 +24,16 @@
 namespace cerys::core::math {
 class TensorShape {
 public:
-    // create a TensorShape with no dim in it
+    // create a TensorShape with size zero: [0] in it
     TensorShape();
+
+    [[nodiscard]] SizeT getTotalElem() const;
+
+    [[nodiscard]] SizeT ndims() const;
 
 private:
     std::vector<SizeT> mShapes;
+
 };
 }
 
