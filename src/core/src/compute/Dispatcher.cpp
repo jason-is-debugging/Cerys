@@ -22,7 +22,11 @@
 namespace cerys::core::compute {
 void Dispatcher::dispatch(ComputeContext ctx, DispatcherKey key,
     const std::vector<math::TensorData>& vector) {
+    auto handler = mDispatchMap.find(key);
+    if (handler == mDispatchMap.end()) {
+        throw std::invalid_argument(std::format("Unknown dispatch key: {}", key));
 
+    }
 }
 
 Dispatcher::Dispatcher() {

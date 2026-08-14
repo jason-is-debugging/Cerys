@@ -59,7 +59,7 @@ public:
     [[nodiscard]] DeviceID deviceID() const;
 
     // a common method to run all operators, replace methods like `add` `sub`
-    static void runOp(std::vector<TensorData> tensorDatas, OperatorID operatorID);
+    static void runOp(const std::vector<TensorData>& tensorDatas, OperatorID operatorID);
 
 private:
     TensorShape mShape;

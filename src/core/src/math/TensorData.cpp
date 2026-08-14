@@ -113,7 +113,7 @@ DeviceID TensorData::deviceID() const {
 DataTypeID reduceDataType();
 
 void TensorData::runOp(
-    std::vector<TensorData> tensorDatas,
+    const std::vector<TensorData>& tensorDatas,
     const OperatorID operatorID) {
 
     if (tensorDatas.empty()) {

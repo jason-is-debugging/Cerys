@@ -36,8 +36,8 @@ void Variable::runOp(std::vector<Variable> vars, const OperatorID operatorID) {
     result.mParentVariables.clear();
     result.mOperatorID = operatorID;
     result.mParentVariables.insert(result.mParentVariables.begin(),
-                                   tensorDatas.begin(),
-                                   tensorDatas.end());
+                                   vars.begin(),
+                                   vars.end());
     vars[vars.size() - 1] = result;
 }
 

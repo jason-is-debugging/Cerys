@@ -20,7 +20,9 @@
 #define CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
 
 #include <cstddef>
+#include <format>
 #include <functional>
+#include <string>
 
 #include "defines.h"
 
@@ -36,15 +38,22 @@ public:
             mDataTypeID(dataTypeID) {
     }
 
-    OperatorID getOperatorID() const {
+    [[nodiscard]] std::string toString() const {
+        return std::vformat("DispatcherKey{{OperatorID: {}}, DeviceID: {}, DataTypeID: {}}",
+                            std::make_format_args(this->mOperatorID,
+                                                  this->mDeviceID,
+                                                  this->mDataTypeID));
+    }
+
+    [[nodiscard]] OperatorID getOperatorID() const {
         return mOperatorID;
     }
 
-    DeviceID getDeviceID() const {
+    [[nodiscard]] DeviceID getDeviceID() const {
         return mDeviceID;
     }
 
-    DataTypeID getDataTypeID() const {
+    [[nodiscard]] DataTypeID getDataTypeID() const {
         return mDataTypeID;
     }
 
@@ -73,16 +82,14 @@ inline bool operator==(const DispatcherKey& lhs, const DispatcherKey& rhs) noexc
 }
 }
 
-namespace std {
 template<>
-struct hash<cerys::core::compute::DispatcherKey> {
+struct std::hash<cerys::core::compute::DispatcherKey> {
     std::size_t operator()(const cerys::core::compute::DispatcherKey& key) const noexcept {
-        std::size_t h = static_cast<std::size_t>(key.getOperatorID());
+        auto h = static_cast<std::size_t>(key.getOperatorID());
         h = h * 0x9E3779B97F4A7C15ULL ^ static_cast<std::size_t>(key.getDeviceID());
         h = h * 0x9E3779B97F4A7C15ULL ^ static_cast<std::size_t>(key.getDataTypeID());
         return h;
     }
 };
-}
 
 #endif //CERYS_DISPATCHERKEY_D4D3B7F1A50C486DAC79FFEF8F36B302_H
