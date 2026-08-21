@@ -293,3 +293,4 @@ Testing
 out/
 builddir/
 coverage_report/
+temp/

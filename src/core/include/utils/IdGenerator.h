@@ -14,7 +14,10 @@ class IdGenerator {
         return id;
     }
 private:
-    static std::atomic<T> m_id = 0;
+    // C++17 inline static: in-class initializer serves as the definition.
+    // This resolves linker errors on MingW/GCC where a plain in-class
+    // `static std::atomic<T> m_id = 0` is not externally visible.
+    inline static std::atomic<T> m_id = 0;
 };
 }
 
