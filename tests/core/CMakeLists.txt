@@ -31,6 +31,7 @@ FetchContent_MakeAvailable(googletest)
 # Collect all test source files
 file(GLOB_RECURSE CORE_TEST_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/utils/*.cpp"
 )
 
 # Create test executable
@@ -47,6 +48,9 @@ target_link_libraries(core_tests
 
 # Enable C++17
 target_compile_features(core_tests PRIVATE cxx_std_17)
+
+# Define this when building tests so that test-only members are available
+target_compile_definitions(core_tests PRIVATE CERYS_TESTING)
 
 # Add include directories for headers
 target_include_directories(core_tests PRIVATE

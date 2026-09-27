@@ -1,0 +1,7 @@
+{
+  "dependencies": [
+    "gtest"
+  ],
+  "name": "cerys",
+  "version-string": "0.1"
+}

@@ -55,31 +55,31 @@ inline std::string concatToString(Args&&... args) {
 // of all `args`. `args` may be any type that supports `operator<<` with
 // `std::ostringstream` (numbers, strings, STL containers with operator<<, etc.).
 template <typename ExceptionType = std::runtime_error, typename... Args>
-[[noreturn]] inline void throwWithFmt(Args&&... args) {
+[[noreturn]] void throwWithFmt(Args&&... args) {
     throw ExceptionType(detail::concatToString(std::forward<Args>(args)...));
 }
 
 // Shortcut: throw std::runtime_error from concatenated args.
 template <typename... Args>
-[[noreturn]] inline void throwRuntime(Args&&... args) {
+[[noreturn]] void throwRuntime(Args&&... args) {
     throw std::runtime_error(detail::concatToString(std::forward<Args>(args)...));
 }
 
 // Shortcut: throw std::invalid_argument from concatenated args.
 template <typename... Args>
-[[noreturn]] inline void throwInvalidArg(Args&&... args) {
+[[noreturn]] void throwInvalidArg(Args&&... args) {
     throw std::invalid_argument(detail::concatToString(std::forward<Args>(args)...));
 }
 
 // Shortcut: throw std::out_of_range from concatenated args.
 template <typename... Args>
-[[noreturn]] inline void throwOutOfRange(Args&&... args) {
+[[noreturn]] void throwOutOfRange(Args&&... args) {
     throw std::out_of_range(detail::concatToString(std::forward<Args>(args)...));
 }
 
 // Shortcut: throw std::logic_error from concatenated args.
 template <typename... Args>
-[[noreturn]] inline void throwLogic(Args&&... args) {
+[[noreturn]] void throwLogic(Args&&... args) {
     throw std::logic_error(detail::concatToString(std::forward<Args>(args)...));
 }
 

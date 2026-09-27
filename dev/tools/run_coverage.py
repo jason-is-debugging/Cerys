@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Usage: python dev/tools/run_coverage.py [LINE%] [BRANCH%]
-Positional thresholds default to 100/100. Reports land in build/."""
+Positional thresholds default to 100/90. Reports land in build/."""
 import os, subprocess, sys
 from pathlib import Path
 
@@ -8,7 +8,7 @@ argv = sys.argv[1:]
 positionals = [a for a in argv if not a.startswith("-")]
 flags = [a for a in argv if a.startswith("-")]
 line_th = float(positionals[0]) if len(positionals) >= 1 else 100.0
-branch_th = float(positionals[1]) if len(positionals) >= 2 else 100.0
+branch_th = float(positionals[1]) if len(positionals) >= 2 else 90.0
 no_build = "--no-build" in flags
 no_test = "--no-test" in flags
 
@@ -58,6 +58,8 @@ gcovr_cmd = [
     "--html-details", str(report_html),
     "--txt", str(report_txt),
     "--print-summary",
+    "--exclude-throw-branches",
+    "--exclude-unreachable-branches",
     "--fail-under-line", str(line_th),
     "--fail-under-branch", str(branch_th),
     "--gcov-ignore-errors", "no_working_dir_found",

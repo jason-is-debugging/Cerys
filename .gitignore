@@ -1,5 +1,9 @@
 # Build directories
 /build/
+/build_cov/
+/build_cov_*/
+/build_coverage/
+/build_coverage_*/
 /cmake-build-*/
 /CMakeFiles/
 /CMakeCache.txt

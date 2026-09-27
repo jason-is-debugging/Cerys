@@ -49,13 +49,13 @@ inline const char* formattedLogLevelName(const LogLevel level) {
     case LogLevel::Fatal:
         return "FATAL";
     }
-    return "?";
+    return "?"; // LCOV_EXCL_LINE unreachable: exhaustive switch over closed enum class // LCOV_EXCL_LINE unreachable: exhaustive switch over closed enum class
 }
 
 namespace detail {
 
 template <typename T>
-inline void appendToStream(std::ostringstream& os, T&& value) {
+ void appendToStream(std::ostringstream& os, T&& value) {
     os << std::forward<T>(value);
 }
 
@@ -63,14 +63,14 @@ inline void appendAllToStream(std::ostringstream&) {
 }
 
 template <typename First, typename... Rest>
-inline void
+ void
 appendAllToStream(std::ostringstream& os, First&& first, Rest&&... rest) {
     appendToStream(os, std::forward<First>(first));
     appendAllToStream(os, std::forward<Rest>(rest)...);
 }
 
 template <typename... Args>
-inline std::string concatToString(Args&&... args) {
+ std::string concatToString(Args&&... args) {
     std::ostringstream os;
     appendAllToStream(os, std::forward<Args>(args)...);
     return os.str();
@@ -100,6 +100,14 @@ public:
         std::lock_guard lock(mMutex);
         mOut = &out;
     }
+
+#ifdef CERYS_TESTING
+    // Test-only overload: allows setting mOut to nullptr to verify the guard branch.
+    void setOutput(std::ostream* out) noexcept {
+        std::lock_guard lock(mMutex);
+        mOut = out;
+    }
+#endif
 
     template <typename... Args>
     void log(LogLevel level, Args&&... args) {
