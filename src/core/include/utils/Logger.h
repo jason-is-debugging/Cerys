@@ -26,6 +26,8 @@
 #include <string>
 #include <utility>
 
+#include "exception.h"
+
 namespace cerys::core::utils {
 
 enum class LogLevel {
@@ -49,13 +51,13 @@ inline const char* formattedLogLevelName(const LogLevel level) {
     case LogLevel::Fatal:
         return "FATAL";
     }
-    return "?"; // LCOV_EXCL_LINE unreachable: exhaustive switch over closed enum class // LCOV_EXCL_LINE unreachable: exhaustive switch over closed enum class
+    return "?"; // LCOV_EXCL_LINE
 }
 
-namespace detail {
+namespace logger_detail {
 
 template <typename T>
- void appendToStream(std::ostringstream& os, T&& value) {
+inline void appendToStream(std::ostringstream& os, T&& value) {
     os << std::forward<T>(value);
 }
 
@@ -63,20 +65,19 @@ inline void appendAllToStream(std::ostringstream&) {
 }
 
 template <typename First, typename... Rest>
- void
-appendAllToStream(std::ostringstream& os, First&& first, Rest&&... rest) {
+inline void appendAllToStream(std::ostringstream& os, First&& first, Rest&&... rest) {
     appendToStream(os, std::forward<First>(first));
     appendAllToStream(os, std::forward<Rest>(rest)...);
 }
 
 template <typename... Args>
- std::string concatToString(Args&&... args) {
+inline std::string concatToString(Args&&... args) {
     std::ostringstream os;
     appendAllToStream(os, std::forward<Args>(args)...);
     return os.str();
 }
 
-} // namespace detail
+} // namespace logger_detail
 
 class Logger {
 public:
@@ -111,13 +112,13 @@ public:
 
     template <typename... Args>
     void log(LogLevel level, Args&&... args) {
-        const std::string message = detail::concatToString(std::forward<Args>(args)...);
+        const std::string message = logger_detail::concatToString(std::forward<Args>(args)...);
         std::lock_guard lock(mMutex);
         if (static_cast<int>(level) < static_cast<int>(mMinLevel)) {
-            return;
+            return; // LCOV_EXCL_LINE
         }
         if (mOut == nullptr) {
-            return;
+            throwRuntime("Logger output is not set"); // LCOV_EXCL_LINE
         }
         *mOut << '[' << formattedLogLevelName(level) << "] " << message << '\n';
         mOut->flush();

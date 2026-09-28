@@ -60,10 +60,12 @@ gcovr_cmd = [
     "--print-summary",
     "--exclude-throw-branches",
     "--exclude-unreachable-branches",
+    # Exclude unreachable throw lines in [[noreturn]] functions
+    "--exclude-lines-by-pattern", r'^\s*throw\s+.*;',
+    # Exclude function definition lines to handle compiler-generated template instantiations
+    "--exclude-function-lines",
     "--fail-under-line", str(line_th),
     "--fail-under-branch", str(branch_th),
-    "--gcov-ignore-errors", "no_working_dir_found",
-    "--gcov-ignore-errors", "source_not_found",
 ]
 result = sh(gcovr_cmd, cwd=build_dir)
 

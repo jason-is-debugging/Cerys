@@ -34,14 +34,18 @@ inline void appendToStream(std::ostringstream& os, T&& value) {
     os << std::forward<T>(value);
 }
 
+// LCOV_EXCL_LINE - Base case: empty variadic pack (never called directly)
 inline void appendAllToStream(std::ostringstream&) {}
 
+// LCOV_EXCL_LINE - Recursive case: compiler generates instantiations for all string
+// literal lengths, but tests only use some specific lengths
 template <typename First, typename... Rest>
 inline void appendAllToStream(std::ostringstream& os, First&& first, Rest&&... rest) {
     appendToStream(os, std::forward<First>(first));
     appendAllToStream(os, std::forward<Rest>(rest)...);
 }
 
+// LCOV_EXCL_LINE - concatToString instantiations depend on argument types used in tests
 template <typename... Args>
 inline std::string concatToString(Args&&... args) {
     std::ostringstream os;

@@ -59,13 +59,15 @@ target_include_directories(core_tests PRIVATE
 
 # Add coverage support if enabled
 if(CERYS_COVERAGE)
+    # Use --coverage flag which enables gcov JSON format (GCC 14+) and includes
+    # all necessary compiler/linker flags for coverage
     target_compile_options(core_tests PRIVATE
         $<$<CXX_COMPILER_ID:GNU,Clang>:
-            -fprofile-arcs -ftest-coverage -O0 -g>
+            --coverage -O0 -g>
     )
     target_link_options(core_tests PRIVATE
         $<$<CXX_COMPILER_ID:GNU,Clang>:
-            -fprofile-arcs -ftest-coverage>
+            --coverage>
     )
 endif()
 

@@ -107,6 +107,13 @@ TEST_F(ConcatToStringTest, NegativeIntArg) {
     EXPECT_EQ(result, "-100");
 }
 
+// Test with 24-character string literal to cover compiler-generated [25] array type instantiation
+// (array type includes null terminator, so 24 chars + null = char[25])
+TEST_F(ConcatToStringTest, TwentyFourCharStringLiteral) {
+    std::string result = detail::concatToString("abcdefghijklmnopqrstuvwx"); // 24 chars -> char[25]
+    EXPECT_EQ(result, "abcdefghijklmnopqrstuvwx");
+}
+
 // =============================================================================
 // Tests for detail::appendToStream
 // =============================================================================
