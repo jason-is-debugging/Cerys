@@ -17,3 +17,9 @@
 //
 
 #include "Tensor.h"
+
+namespace cerys {
+
+// Template definitions are in the header file
+
+} // namespace cerys

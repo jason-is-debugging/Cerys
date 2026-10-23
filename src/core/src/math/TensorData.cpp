@@ -110,7 +110,10 @@ DeviceID TensorData::deviceID() const {
 }
 
 
-DataTypeID reduceDataType();
+DataTypeID reduceDataType() {
+    // TODO: Implement proper data type reduction logic
+    return 0; // Return Int32 as default data type
+}
 
 void TensorData::runOp(
     const std::vector<TensorData>& tensorDatas,

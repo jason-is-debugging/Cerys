@@ -30,7 +30,8 @@ namespace cerys::core::utils {
 // Tests for IdGenerator<int>
 // =============================================================================
 
-class IdGeneratorIntTest : public ::testing::Test {};
+class IdGeneratorIntTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorIntTest, GenerateIdReturnsIncreasingValues) {
     // Reset the static counter by generating IDs until we get a predictable sequence
@@ -57,7 +58,8 @@ TEST_F(IdGeneratorIntTest, GenerateIdReturnsUniqueValues) {
 // Tests for IdGenerator<unsigned int>
 // =============================================================================
 
-class IdGeneratorUnsignedIntTest : public ::testing::Test {};
+class IdGeneratorUnsignedIntTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorUnsignedIntTest, GenerateIdReturnsIncreasingValues) {
     const unsigned int id0 = IdGenerator<unsigned int>::generateId();
@@ -75,7 +77,8 @@ TEST_F(IdGeneratorUnsignedIntTest, GenerateIdReturnsNonNegative) {
 // Tests for IdGenerator<long>
 // =============================================================================
 
-class IdGeneratorLongTest : public ::testing::Test {};
+class IdGeneratorLongTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorLongTest, GenerateIdReturnsIncreasingValues) {
     const long id0 = IdGenerator<long>::generateId();
@@ -93,7 +96,8 @@ TEST_F(IdGeneratorLongTest, GenerateIdReturnsNonNegative) {
 // Tests for IdGenerator<long long>
 // =============================================================================
 
-class IdGeneratorLongLongTest : public ::testing::Test {};
+class IdGeneratorLongLongTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorLongLongTest, GenerateIdReturnsIncreasingValues) {
     const long long id0 = IdGenerator<long long>::generateId();
@@ -111,7 +115,8 @@ TEST_F(IdGeneratorLongLongTest, GenerateIdReturnsNonNegative) {
 // Tests for IdGenerator<unsigned long long>
 // =============================================================================
 
-class IdGeneratorULLTest : public ::testing::Test {};
+class IdGeneratorULLTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorULLTest, GenerateIdReturnsIncreasingValues) {
     const unsigned long long id0 = IdGenerator<unsigned long long>::generateId();
@@ -129,7 +134,8 @@ TEST_F(IdGeneratorULLTest, GenerateIdReturnsNonNegative) {
 // Tests for IdGenerator<short>
 // =============================================================================
 
-class IdGeneratorShortTest : public ::testing::Test {};
+class IdGeneratorShortTest : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorShortTest, GenerateIdReturnsIncreasingValues) {
     const short id0 = IdGenerator<short>::generateId();
@@ -142,7 +148,10 @@ TEST_F(IdGeneratorShortTest, GenerateIdReturnsIncreasingValues) {
 // Tests for IdGenerator<uint32_t>
 // =============================================================================
 
-class IdGeneratorUint32Test : public ::testing::Test {};
+namespace {
+class IdGeneratorUint32Test : public ::testing::Test {
+};
+}
 
 TEST_F(IdGeneratorUint32Test, GenerateIdReturnsIncreasingValues) {
     const uint32_t id0 = IdGenerator<uint32_t>::generateId();
@@ -160,7 +169,8 @@ TEST_F(IdGeneratorUint32Test, GenerateIdReturnsNonNegative) {
 // Tests for IdGenerator<uint64_t>
 // =============================================================================
 
-class IdGeneratorUint64Test : public ::testing::Test {};
+class IdGeneratorUint64Test : public ::testing::Test {
+};
 
 TEST_F(IdGeneratorUint64Test, GenerateIdReturnsIncreasingValues) {
     const uint64_t id0 = IdGenerator<uint64_t>::generateId();
@@ -178,7 +188,10 @@ TEST_F(IdGeneratorUint64Test, GenerateIdReturnsNonNegative) {
 // Tests for different template types generate independently
 // =============================================================================
 
-class IdGeneratorDifferentTypesTest : public ::testing::Test {};
+namespace {
+class IdGeneratorDifferentTypesTest : public ::testing::Test {
+};
+}
 
 TEST_F(IdGeneratorDifferentTypesTest, DifferentTypesHaveIndependentCounters) {
     const int int_id = IdGenerator<int>::generateId();
@@ -194,20 +207,24 @@ TEST_F(IdGeneratorDifferentTypesTest, DifferentTypesHaveIndependentCounters) {
 // Integration test for basic usage
 // =============================================================================
 
-class IdGeneratorIntegrationTest : public ::testing::Test {};
+namespace {
+class IdGeneratorIntegrationTest : public ::testing::Test {
+};
+}
 
 TEST_F(IdGeneratorIntegrationTest, GenerateMultipleIdsInSequence) {
     constexpr int num_ids = 10;
     int ids[num_ids];
 
-    for (int i = 0; i < num_ids; ++i) {
-        ids[i] = IdGenerator<int>::generateId();
+    for (int& id : ids) {
+        id = IdGenerator<int>::generateId();
     }
 
     // Verify all IDs are unique
     for (int i = 0; i < num_ids; ++i) {
         for (int j = i + 1; j < num_ids; ++j) {
-            EXPECT_NE(ids[i], ids[j]) << "IDs at index " << i << " and " << j << " should be different";
+            EXPECT_NE(ids[i], ids[j]) << "IDs at index " << i << " and " << j <<
+ " should be different";
         }
     }
 
@@ -221,7 +238,7 @@ TEST_F(IdGeneratorIntegrationTest, ForwardReferenceTemplateParameter) {
     // Test with forward reference - IdGenerator<T> where T is complete
     IdGenerator<int> generator;
     // Note: IdGenerator::generateId() is static, so we just verify it compiles
-    (void)IdGenerator<int>::generateId();
+    (void) IdGenerator<int>::generateId();
 }
 
-}  // namespace cerys::core::utils
+} // namespace cerys::core::utils

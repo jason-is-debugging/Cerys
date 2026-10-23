@@ -15,12 +15,37 @@
 //  Contributors:
 //  Jason Shen (jason.shen.gm@gmail.com) (https://github.com/jason-is-debugging)
 //
+
 #ifndef CERYS_TENSOR_132F31F769AA4849B9B1DBC365BFE625_H
 #define CERYS_TENSOR_132F31F769AA4849B9B1DBC365BFE625_H
 
+#include "core/include/ml/Variable.h"
+#include "LiteralList.h"
+
 namespace cerys {
+template<typename T>
 class Tensor {
 public:
+    Tensor() : mVariable(core::math::TensorData{}) {}
+    Tensor(std::initializer_list<T> initList) : mVariable(core::math::TensorData{}) {
+        // TODO: Implement initialization from initializer_list
+    }
+    Tensor(LiteralList<T> initList) : mVariable(core::math::TensorData{}) {
+        // TODO: Implement initialization from LiteralList
+    }
+
+    Tensor(Tensor const &other);
+    Tensor(Tensor &&other) noexcept;
+
+    Tensor &operator=(Tensor const &other);
+    Tensor &operator=(Tensor &&other) noexcept;
+
+    Tensor add(const Tensor &other);
+    Tensor sub(const Tensor &other);
+    Tensor mul(const Tensor &other);
+    Tensor div(const Tensor &other);
+private:
+    core::ml::Variable mVariable;
 
 };
 }

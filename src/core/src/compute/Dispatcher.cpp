@@ -20,12 +20,10 @@
 #include "math/TensorData.h"
 
 namespace cerys::core::compute {
-void Dispatcher::dispatch(ComputeContext ctx, DispatcherKey key,
+void Dispatcher::dispatch(ComputeContext ctx, const DispatcherKey key,
     const std::vector<math::TensorData>& vector) {
-    auto handler = mDispatchMap.find(key);
-    if (handler == mDispatchMap.end()) {
-        throw std::invalid_argument(std::format("Unknown dispatch key: {}", key));
-
+    if (const auto handler = mDispatchMap.find(key); handler == mDispatchMap.end()) {
+        throw std::invalid_argument("Unknown dispatch key: " + key.toString());
     }
 }
 

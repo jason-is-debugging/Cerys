@@ -36,7 +36,8 @@ namespace cerys::core::utils {
 // Tests for LogLevel enum
 // =============================================================================
 
-class LogLevelTest : public ::testing::Test {};
+class LogLevelTest : public ::testing::Test {
+};
 
 TEST_F(LogLevelTest, LogLevelValuesAreInIncreasingOrder) {
     EXPECT_LT(static_cast<int>(LogLevel::Debug), static_cast<int>(LogLevel::Info));
@@ -49,7 +50,8 @@ TEST_F(LogLevelTest, LogLevelValuesAreInIncreasingOrder) {
 // Tests for formattedLogLevelName
 // =============================================================================
 
-class FormattedLogLevelNameTest : public ::testing::Test {};
+class FormattedLogLevelNameTest : public ::testing::Test {
+};
 
 TEST_F(FormattedLogLevelNameTest, DebugReturnsCorrectFormat) {
     EXPECT_STREQ(formattedLogLevelName(LogLevel::Debug), "DEBUG");
@@ -75,7 +77,8 @@ TEST_F(FormattedLogLevelNameTest, FatalReturnsCorrectFormat) {
 // Tests for logger_detail::concatToString - Logger internal helper
 // =============================================================================
 
-class LoggerDetailConcatToStringTest : public ::testing::Test {};
+class LoggerDetailConcatToStringTest : public ::testing::Test {
+};
 
 TEST_F(LoggerDetailConcatToStringTest, EmptyArgsReturnsEmptyString) {
     std::string result = logger_detail::concatToString();
@@ -143,7 +146,13 @@ TEST_F(LoggerDetailConcatToStringTest, MultipleCharArgs) {
 }
 
 TEST_F(LoggerDetailConcatToStringTest, MixedTypes) {
-    std::string result = logger_detail::concatToString("int: ", 10, " str: ", "hello", " bool: ", true);
+    std::string result = logger_detail::concatToString(
+        "int: ",
+        10,
+        " str: ",
+        "hello",
+        " bool: ",
+        true);
     EXPECT_EQ(result, "int: 10 str: hello bool: 1");
 }
 
@@ -155,7 +164,11 @@ TEST_F(LoggerDetailConcatToStringTest, LongString) {
 
 TEST_F(LoggerDetailConcatToStringTest, MultipleLongStrings) {
     std::string result = logger_detail::concatToString(
-        "Part1 ", "Part2 ", "Part3 ", "Part4 ", "Part5");
+        "Part1 ",
+        "Part2 ",
+        "Part3 ",
+        "Part4 ",
+        "Part5");
     EXPECT_EQ(result, "Part1 Part2 Part3 Part4 Part5");
 }
 
@@ -173,7 +186,8 @@ TEST_F(LoggerDetailConcatToStringTest, NegativeDoubleArg) {
 // Tests for logger_detail::appendToStream
 // =============================================================================
 
-class LoggerDetailAppendToStreamTest : public ::testing::Test {};
+class LoggerDetailAppendToStreamTest : public ::testing::Test {
+};
 
 TEST_F(LoggerDetailAppendToStreamTest, AppendInt) {
     std::ostringstream os;
@@ -215,7 +229,8 @@ TEST_F(LoggerDetailAppendToStreamTest, AppendBoolFalse) {
 // Tests for logger_detail::appendAllToStream
 // =============================================================================
 
-class LoggerDetailAppendAllToStreamTest : public ::testing::Test {};
+class LoggerDetailAppendAllToStreamTest : public ::testing::Test {
+};
 
 TEST_F(LoggerDetailAppendAllToStreamTest, EmptyArgs) {
     std::ostringstream os;
@@ -562,7 +577,8 @@ TEST_F(FreeFunctionLogAPITest, DebugWithMultipleArgs) {
 
 TEST_F(FreeFunctionLogAPITest, InfoWithMultipleArgs) {
     info("name=", "test", " count=", 100);
-    EXPECT_NE(output_stream->str().find("[INFO ] name=test count=100"), std::string::npos);
+    EXPECT_NE(output_stream->str().find("[INFO ] name=test count=100"),
+              std::string::npos);
 }
 
 TEST_F(FreeFunctionLogAPITest, SetMinLevelAffectsAllFunctions) {
@@ -615,7 +631,8 @@ TEST_F(FreeFunctionLogAPITest, AllFunctionsWorkInSequence) {
 // Tests for logger() singleton function
 // =============================================================================
 
-class LoggerSingletonTest : public ::testing::Test {};
+class LoggerSingletonTest : public ::testing::Test {
+};
 
 TEST_F(LoggerSingletonTest, LoggerSingletonReturnsValidReference) {
     Logger& lg = logger();
@@ -646,7 +663,8 @@ TEST_F(LoggerSingletonTest, SingletonSharesStateAcrossCalls) {
 // Integration tests
 // =============================================================================
 
-class LoggerIntegrationTest : public ::testing::Test {};
+class LoggerIntegrationTest : public ::testing::Test {
+};
 
 TEST_F(LoggerIntegrationTest, ComplexLogMessage) {
     std::ostringstream output;
@@ -654,12 +672,19 @@ TEST_F(LoggerIntegrationTest, ComplexLogMessage) {
     lg.setOutput(output);
     lg.setMinLevel(LogLevel::Debug);
 
-    lg.log(LogLevel::Info, "User ", 1234, " logged in from ", "192.168.1.1",
-           " at ", "2024-01-01 12:00:00");
+    lg.log(LogLevel::Info,
+           "User ",
+           1234,
+           " logged in from ",
+           "192.168.1.1",
+           " at ",
+           "2024-01-01 12:00:00");
 
     std::string result = output.str();
-    EXPECT_NE(result.find("[INFO ] User 1234 logged in from 192.168.1.1 at 2024-01-01 12:00:00"),
-              std::string::npos);
+    EXPECT_NE(
+        result.find(
+            "[INFO ] User 1234 logged in from 192.168.1.1 at 2024-01-01 12:00:00"),
+        std::string::npos);
 }
 
 TEST_F(LoggerIntegrationTest, LevelFilteringScenarios) {
@@ -668,9 +693,12 @@ TEST_F(LoggerIntegrationTest, LevelFilteringScenarios) {
     lg.setOutput(output);
 
     // Test each minimum level
-    std::vector<std::pair<LogLevel, std::vector<LogLevel>>> test_cases = {
-        {LogLevel::Debug, {LogLevel::Debug, LogLevel::Info, LogLevel::Warn, LogLevel::Error, LogLevel::Fatal}},
-        {LogLevel::Info, {LogLevel::Info, LogLevel::Warn, LogLevel::Error, LogLevel::Fatal}},
+    std::vector<std::pair<LogLevel, std::vector<LogLevel> > > test_cases = {
+        {LogLevel::Debug,
+         {LogLevel::Debug, LogLevel::Info, LogLevel::Warn, LogLevel::Error,
+          LogLevel::Fatal}},
+        {LogLevel::Info,
+         {LogLevel::Info, LogLevel::Warn, LogLevel::Error, LogLevel::Fatal}},
         {LogLevel::Warn, {LogLevel::Warn, LogLevel::Error, LogLevel::Fatal}},
         {LogLevel::Error, {LogLevel::Error, LogLevel::Fatal}},
         {LogLevel::Fatal, {LogLevel::Fatal}}
@@ -689,14 +717,19 @@ TEST_F(LoggerIntegrationTest, LevelFilteringScenarios) {
 
         std::string result = output.str();
         EXPECT_EQ(result.find("d") != std::string::npos,
-                  (min_level == LogLevel::Debug)) << "min_level=" << static_cast<int>(min_level);
+                  (min_level == LogLevel::Debug)) << "min_level=" << static_cast<int>
+            (min_level);
         EXPECT_EQ(result.find("i") != std::string::npos,
-                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Info))) << "min_level=" << static_cast<int>(min_level);
+                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Info)))
+ << "min_level=" << static_cast<int>(min_level);
         EXPECT_EQ(result.find("w") != std::string::npos,
-                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Warn))) << "min_level=" << static_cast<int>(min_level);
+                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Warn)))
+ << "min_level=" << static_cast<int>(min_level);
         EXPECT_EQ(result.find("e") != std::string::npos,
-                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Error))) << "min_level=" << static_cast<int>(min_level);
-        EXPECT_EQ(result.find("f") != std::string::npos, true) << "Fatal should always be logged";
+                  (static_cast<int>(min_level) <= static_cast<int>(LogLevel::Error)))
+ << "min_level=" << static_cast<int>(min_level);
+        EXPECT_EQ(result.find("f") != std::string::npos, true) <<
+ "Fatal should always be logged";
     }
 }
 
@@ -733,4 +766,4 @@ TEST_F(LoggerIntegrationTest, FormattedOutputFormat) {
     EXPECT_EQ(result.find("[INFO ] test\n"), 0);
 }
 
-}  // namespace cerys::core::utils
+} // namespace cerys::core::utils

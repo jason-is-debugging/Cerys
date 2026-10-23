@@ -51,3 +51,4 @@ install(EXPORT cerysTargets
 # =========================== Tests Configuration ===================================
 # Include test subdirectories
 add_subdirectory(tests)
+add_subdirectory(example)

@@ -13,6 +13,7 @@ else ()
 endif ()
 
 include_directories(${PROJECT_SOURCE_DIR}/src/cpp/include)
+include_directories(${PROJECT_SOURCE_DIR}/src)
 
 # Set include directories
 target_include_directories(cerys_cpp_frontend
